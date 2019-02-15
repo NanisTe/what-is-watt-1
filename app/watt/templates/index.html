@@ -3,27 +3,42 @@
 
 {% block body %}
 
-<h2>Compare 2 items</h2>
-
 <form action="{% url 'root' %}" method="post">
-    {% csrf_token %}
-    <select name="item1">
-      {% for item in items %}
-        <option value="{{ item.id }}" {% if item == item1 %}selected="selected" {% endif %}>{{ item.name }}</option>
-      {% endfor %}
-    </select>
+  {% csrf_token %}
 
-    ===
+  <div class="grid">
+    <div class="grid__item w-1/2">
+      <div class="form-group">
+        <label for="item1" class="field-label">Compare:</label>
+        <select name="item1" class="field">
+          {% for item in items %}
+            <option value="{{ item.id }}" {% if item == item1 %}selected="selected" {% endif %}>{{ item.name }}</option>
+          {% endfor %}
+        </select>
 
-    {{ value }}
+        <p class="mrgv-">{{ item1.power }}</p>
+      </div>
+    </div>
 
-    <select name="item2">
-      {% for item in items %}
-        <option value="{{ item.id }}" {% if item == item2 %}selected="selected" {% endif %}>{{ item.name }}</option>
-      {% endfor %}
-    </select>
+    <div class="grid__item w-1/2">
+      <div class="form-group">
+        <label for="item2" class="field-label">with</label>
+        <select name="item2" class="field">
+          {% for item in items %}
+            <option value="{{ item.id }}" {% if item == item2 %}selected="selected" {% endif %}>{{ item.name }}</option>
+          {% endfor %}
+        </select>
 
-    <input type="submit" value="Compare">
+        <p class="mrgv-">{{ item2.power }}</p>
+      </div>
+
+      <p class="text-large text-bold">1 {{ item1.name }} worth {{ value }} {{ item2.name }}</p>
+    </div>
+  </div>
+
+  <div class="mrgv text-center">
+    <input type="submit" value="Compare" class="btn btn--primary btn--large">
+  </div>
 </form>
 
 {% endblock %}
