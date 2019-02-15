@@ -14,7 +14,9 @@ __pycache__
 vagrant_ansible_inventory_default
 .vagrant
 /virtualization/playbook.retry
+
 /data/*
 
 
 /.idea/*
+
